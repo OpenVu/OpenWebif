@@ -53,7 +53,7 @@ def getAllNetworks():
 				tmpaddr = str(ipaddress.ip_address(int(tmp[0], 16)))
 				if tmp[2].lower() != "ff":
 					tmpaddr = "%s/%s" % (tmpaddr, int(tmp[2].lower(), 16))
-					tmpaddr = str(ipaddress.IPv6Network(unicode(tmpaddr), strict=False))
+					tmpaddr = str(ipaddress.IPv6Network(str(tmpaddr), strict=False))
 
 				tempaddrs.append(tmpaddr)
 	# Crappy legacy IPv4 has no proc entry with clean addresses
@@ -66,7 +66,7 @@ def getAllNetworks():
 		ip = '.'.join(str(x) for x in crap)
 		netmask = str(sum([bin(int(x)).count('1') for x in iNetwork.getAdapterAttribute(iface, "netmask")]))
 		ip = ip + "/" + netmask
-		tmpaddr = str(ipaddress.IPv4Network(unicode(ip), strict=False))
+		tmpaddr = str(ipaddress.IPv4Network(str(ip), strict=False))
 		tempaddrs.append(tmpaddr)
 
 	if tempaddrs == []:
@@ -334,12 +334,12 @@ class AuthResource(resource.Resource):
 			networks = getAllNetworks()
 			if networks:
 				for network in networks:
-					if ipaddress.ip_address(unicode(peer)) in ipaddress.ip_network(unicode(network), strict=False):
+					if ipaddress.ip_address(str(peer)) in ipaddress.ip_network(str(network), strict=False):
 						return self.resource.getChildWithDefault(path, request)
 
 		# #2: Auth is disabled and access is from private address space (Usually VPN) and access for VPNs has been granted
 		if (not request.isSecure() and config.OpenWebif.auth.value is False) or (request.isSecure() and config.OpenWebif.https_auth.value is False):
-			if config.OpenWebif.vpn_access.value is True and ipaddress.ip_address(unicode(peer)).is_private:
+			if config.OpenWebif.vpn_access.value is True and ipaddress.ip_address(str(peer)).is_private:
 				return self.resource.getChildWithDefault(path, request)
 
 		# #3: Access is from localhost and streaming auth is disabled - or - we only want to see our IPv6 (For inadyn-mt)
@@ -394,9 +394,9 @@ class AuthResource(resource.Resource):
 			networks = getAllNetworks()
 			if networks:
 				for network in networks:
-					if ipaddress.ip_address(unicode(peer)) in ipaddress.ip_network(unicode(network), strict=False):
+					if ipaddress.ip_address(str(peer)) in ipaddress.ip_network(str(network), strict=False):
 						samenet=True
-			if not (ipaddress.ip_address(unicode(peer)).is_private or samenet):
+			if not (ipaddress.ip_address(str(peer)).is_private or samenet):
 				return False
 		from crypt import crypt
 		from pwd import getpwnam
