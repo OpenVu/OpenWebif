@@ -12,7 +12,7 @@
 from enigma import eServiceReference, getBestPlayableServiceReference
 from ServiceReference import ServiceReference
 from Plugins.Extensions.OpenWebif.controllers.models.info import getInfo
-from urllib import unquote, quote
+from urllib.parse import unquote, quote
 import os
 import re
 from Components.config import config

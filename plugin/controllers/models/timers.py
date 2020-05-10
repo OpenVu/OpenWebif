@@ -18,7 +18,7 @@ from Components.TimerSanityCheck import TimerSanityCheck
 from RecordTimer import RecordTimerEntry, RecordTimer, parseEvent
 from ServiceReference import ServiceReference
 from time import time, strftime, localtime, mktime
-from urllib import unquote
+from urllib.parse import unquote
 from Plugins.Extensions.OpenWebif.controllers.models.info import GetWithAlternative
 from Plugins.Extensions.OpenWebif.controllers.i18n import _
 

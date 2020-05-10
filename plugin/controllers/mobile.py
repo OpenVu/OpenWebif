@@ -25,7 +25,7 @@ from Plugins.Extensions.OpenWebif.controllers.base import BaseController
 from Plugins.Extensions.OpenWebif.controllers.models.movies import getMovieList
 from Plugins.Extensions.OpenWebif.controllers.models.timers import getTimers
 from Plugins.Extensions.OpenWebif.controllers.models.services import getBouquets, getChannels, getChannelEpg, getEvent, getPicon
-from urllib import quote
+from urllib.parse import quote
 from time import localtime, strftime
 from boxbranding import getHaveTranscoding
 
