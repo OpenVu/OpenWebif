@@ -42,7 +42,7 @@ def getEnigmaVersionString():
 STATICBOXINFO = None
 
 def getFriendlyImageDistro():
-	dist = boxbranding.getImageDistro().replace("openvision", "Open Vision")
+	dist = boxbranding.getImageDistro().replace("openpli", "Open Pli")
 	return dist
 
 def getIPMethod(iface):
@@ -229,8 +229,8 @@ def getInfo(session=None, need_fullinfo=False):
 	info['imagedistro'] = boxbranding.getImageDistro()
 	info['friendlyimagedistro'] = getFriendlyImageDistro()
 	info['oever'] = boxbranding.getImageBuild()
-	info['visionversion'] = boxbranding.getVisionVersion()
-	info['visionrevision'] = boxbranding.getVisionRevision()
+	info['pliversion'] = boxbranding.getPliVersion()
+	info['plirevision'] = boxbranding.getPliRevision()
 	info['visionmodule'] = about.getVisionModule()
 
 	info['enigmaver'] = getEnigmaVersionString()
